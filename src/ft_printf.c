@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "../include/ft_printf.h"
 
 int	ft_printf(const char *format, ...)
 {
@@ -27,6 +27,7 @@ int	ft_printf(const char *format, ...)
 			count += write(1, format, 1);
 		format++;
 	}
+	return (count);
 }
 
 int main()

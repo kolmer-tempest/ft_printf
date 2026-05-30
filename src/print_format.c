@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_print.h"
+#include "../include/ft_printf.h"
 
 int	print_format(const char *format, va_list args)
 {
@@ -19,24 +19,22 @@ int	print_format(const char *format, va_list args)
 	count = 0;
 	if (!args)
 		return (0);
-	else if (format == "c")
-		return write(1, &va_arg(args, char), 1);
+	else if (format == 'c')
+		return ft_write(va_arg(args, char *), 1);
 	else if (format == 's')
-		return write(1, &va_arg(args, char *), ft_strlen(args));
-	elseif (*format == 'i' || *format == 'd')
+		return ft_write(va_arg(args, char *), ft_strlen(args));
+	else if (*format == 'i' || *format == 'd')
 		return printnbr(va_arg(args, int));
 	else if (format == '%')
 		return write(1, format, 1);
 	else if (format == 'u')
 		return printnbr(va_arg(args, unsigned int));
 	else if (*format == 'x')
-		return printxnbr(va_arg(args, int));
+		return printxnbr(va_arg(args, unsigned int));
 	else if (*format == 'X')
-		return printXnbr(va_arg(args, int));
-	// elseif (*format == 'p')
+		return printXnbr(va_arg(args, unsigned int));
+	else if (*format == 'p')
+		return (printxnbr(va_arg(args, unsigned int)));
 	else
-	{
-		write(1, format, 1);
 		return (write(1, format, 1) + 1);
-	}
 }
