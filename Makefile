@@ -1,9 +1,9 @@
-NAME = libprintf.a
+NAME = libftprintf.a
 
 SRC_DIR = src
 
-SRCS_INC = ft_printf.c ft_write.c print_format.c printnbr.c \
-			printxnbr.c printXnbr.c ft_itoa.c
+SRCS_INC = ft_printf.c put_functions.c print_format.c printnbr.c \
+			printxnbr.c printXnbr.c printptr.c
 
 CFLAGS = -Wall -Wextra -Werror
 

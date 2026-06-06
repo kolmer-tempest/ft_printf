@@ -22,7 +22,10 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			count += print_format(format++, args);
+		{
+			format++;
+			count += print_format(format, args);
+		}
 		else
 			count += write(1, format, 1);
 		format++;

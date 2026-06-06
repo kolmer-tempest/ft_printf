@@ -12,7 +12,24 @@
 
 #include "../include/ft_printf.h"
 
-int	ft_write(char *str, int slen)
+int	ft_putchar(int c)
 {
-	return (write(1, str, slen));
+	int	count;
+
+	count = write(1, &c, 1);
+	return (count);
+}
+
+int	ft_putstr(char *str)
+{
+	size_t	len;
+	int		count;
+
+	len = 0;
+	if (!str)
+		return (ft_putstr("(null)"));
+	while (str[len])
+		len++;
+	count = write(1, str, len);
+	return (count);
 }

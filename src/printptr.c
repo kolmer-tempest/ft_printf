@@ -1,54 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printnbr.c                                         :+:      :+:    :+:   */
+/*   printptr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bpires-k <bpires-k@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/27 21:37:01 by bpires-k          #+#    #+#             */
-/*   Updated: 2026/06/06 16:17:27 by bpires-k         ###   ########.fr       */
+/*   Created: 2026/06/06 15:35:44 by bpires-k          #+#    #+#             */
+/*   Updated: 2026/06/06 17:44:49 by bpires-k         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-// static size_t 	ft_strlen(char *str)
-// {
-// 	size_t	count;
-
-// 	count = 0;
-// 	while (str[count])
-// 	{
-// 		count++;
-// 	}
-// 	return (count);
-// }
-
-int	printnbr(int n)
+static int	printxnbr_p(uintptr_t p)
 {
 	int		count;
-	long	nb;
+	char	*base;
 
 	count = 0;
-	nb = n;
-	if (nb < 0)
-	{
-		count += write(1, "-", 1);
-		nb *= -1;
-	}
-	if (nb >= 10)
-		count += printnbr(nb / 10);
-	count += ft_putchar((nb % 10) + '0');
+	base = "0123456789abcdef";
+	if (p >= 16)
+		count += printxnbr_p(p / 16);
+	count += write(1, &base[p % 16], 1);
 	return (count);
 }
 
-int	printunbr(unsigned int nb)
+int	printptr(void *ptr)
 {
 	int	count;
 
 	count = 0;
-	if (nb >= 10)
-		count += printunbr(nb / 10);
-	count += ft_putchar((nb % 10) + '0');
+	if (!ptr)
+		return (ft_putstr("(nil)"));
+	count += ft_putstr("0x");
+	count += printxnbr_p((uintptr_t)ptr);
 	return (count);
 }
