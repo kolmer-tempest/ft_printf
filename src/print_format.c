@@ -12,29 +12,42 @@
 
 #include "../include/ft_printf.h"
 
-int	print_format(const char *format, va_list args)
+static int	ft_strlen(char *str)
 {
 	int	count;
 
 	count = 0;
+	while (str[count])
+	{
+		count++;
+	}
+	return (count);
+}
+
+int	print_format(const char *format, va_list args)
+{
+	char	*str;
+
 	if (!args)
 		return (0);
-	else if (format == 'c')
-		return ft_write(va_arg(args, char *), 1);
-	else if (format == 's')
-		return ft_write(va_arg(args, char *), ft_strlen(args));
+	else if (*format == 'c')
+		return (ft_write(va_arg(args, char *), 1));
+	else if (*format == 's')
+	{
+		str = va_arg(args, char *);
+		return (ft_write(str, ft_strlen(str) - 1));
+	}
 	else if (*format == 'i' || *format == 'd')
-		return printnbr(va_arg(args, int));
-	else if (format == '%')
-		return write(1, format, 1);
-	else if (format == 'u')
-		return printnbr(va_arg(args, unsigned int));
+		return (printnbr(va_arg(args, int)));
+	else if (*format == '%')
+		return (write(1, format, 1));
+	else if (*format == 'u')
+		return (printnbr(va_arg(args, unsigned int)));
 	else if (*format == 'x')
-		return printxnbr(va_arg(args, unsigned int));
+		return (printxnbr(va_arg(args, unsigned long)));
 	else if (*format == 'X')
-		return printXnbr(va_arg(args, unsigned int));
+		return (printx_nbr(va_arg(args, unsigned long)));
 	else if (*format == 'p')
-		return (printxnbr(va_arg(args, unsigned int)));
-	else
-		return (write(1, format, 1) + 1);
+		return (printxnbr(va_arg(args, unsigned long)));
+	return (write(1, format, 1) + 1);
 }

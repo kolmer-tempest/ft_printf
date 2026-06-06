@@ -30,9 +30,9 @@ int	ft_printf(const char *format, ...)
 	return (count);
 }
 
-int main()
-{
-	ft_printf("bruv %s", "keke");
-	printf("\nbruv %s\n", "keke");
-	return (0);
-}
+// int	main(void)
+// {
+// 	ft_printf("bruv %s", "keke");
+// 	printf("\nbruv %s\n", "keke");
+// 	return (0);
+// }

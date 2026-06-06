@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_write.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bpires-k <bpires-k@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/06/05 16:49:49 by bpires-k          #+#    #+#             */
+/*   Updated: 2026/06/05 16:49:51 by bpires-k         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ft_printf.h"
 
-int ft_write(char *str, int slen)
+int	ft_write(char *str, int slen)
 {
-    return (write(1, &str, slen));
+	return (write(1, str, slen));
 }
